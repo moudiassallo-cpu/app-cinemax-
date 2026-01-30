@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CinéMax - Votre cinéma en ligne</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/x-icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🎬</text></svg>">
+</head>
+
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <div class="header-content">
+                <a href="#" class="logo">
+                    <span class="logo-icon">🎬</span>
+                    <span class="logo-text">CinéMax</span>
+                </a>
+
+                <nav class="nav-menu">
+                    <a href="#home" class="nav-link active" data-page="home">
+                        <i class="fas fa-home"></i> Accueil
+                    </a>
+                    <a href="#movies" class="nav-link" data-page="movies">
+                        <i class="fas fa-film"></i> Films
+                    </a>
+                    <a href="#genres" class="nav-link" data-page="genres">
+                        <i class="fas fa-tags"></i> Genres
+                    </a>
+                    <a href="#favorites" class="nav-link" data-page="favorites">
+                        <i class="fas fa-heart"></i> Favoris
+                        <span class="favorites-count">0</span>
+                    </a>
+                </nav>
+
+                <div class="search-container">
+                    <i class="fas fa-search search-icon"></i>
+                    <input type="text" class="search-input" placeholder="Rechercher un film...">
+                    <button class="filter-btn" id="filterToggle">
+                        <i class="fas fa-filter"></i>
+                    </button>
+                </div>
+                <button id="themeToggle" class="theme-toggle" aria-label="Basculer thème">🌙</button>
+            </div>
+
+            <!-- Filtres -->
+            <div class="filters-panel" id="filtersPanel">
+                <div class="filters-header">
+                    <h3>Filtrer les films</h3>
+                    <button class="close-filters" id="closeFilters">&times;</button>
+                </div>
+                <div class="filters-content">
+                    <div class="filter-group">
+                        <label for="genreFilter">Genre</label>
+                        <select id="genreFilter" class="filter-select">
+                            <option value="all">Tous les genres</option>
+                            <option value="Action">🎬 Action</option>
+                            <option value="Comédie">😂 Comédie</option>
+                            <option value="Drame">🎭 Drame</option>
+                            <option value="Science-fiction">🚀 Science-fiction</option>
+                            <option value="Horreur">🧟 Horreur</option>
+                            <option value="Romance">💕 Romance</option>
+                            <option value="Animation">👨‍👩‍👧 Animation</option>
+                        </select>
+                    </div>
+
+                    <div class="filter-group">
+                        <label for="yearFilter">Année</label>
+                        <select id="yearFilter" class="filter-select">
+                            <option value="all">Toutes les années</option>
+                            <option value="2020-2023">2020-2023</option>
+                            <option value="2015-2019">2015-2019</option>
+                            <option value="2010-2014">2010-2014</option>
+                            <option value="2000-2009">2000-2009</option>
+                            <option value="1990-1999">1990-1999</option>
+                        </select>
+                    </div>
+
+                    <div class="filter-group">
+                        <label for="ratingFilter">Note minimale</label>
+                        <select id="ratingFilter" class="filter-select">
+                            <option value="0">Toutes les notes</option>
+                            <option value="8">8/10 et plus</option>
+                            <option value="7">7/10 et plus</option>
+                            <option value="6">6/10 et plus</option>
+                        </select>
+                    </div>
+
+                    <div class="filter-group">
+                        <label for="sortBy">Trier par</label>
+                        <select id="sortBy" class="filter-select">
+                            <option value="title">Titre (A-Z)</option>
+                            <option value="year">Année (récent)</option>
+                            <option value="rating">Note (élevée)</option>
+                            <option value="popularity">Popularité</option>
+                        </select>
+                    </div>
+
+                    <button class="btn apply-filters" id="applyFilters">
+                        <i class="fas fa-check"></i> Appliquer les filtres
+                    </button>
+                    <button class="btn reset-filters" id="resetFilters">
+                        <i class="fas fa-redo"></i> Réinitialiser
+                    </button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Page principale -->
+    <main class="main-content">
+        <!-- Section Hero -->
+        <section class="hero-section" id="home">
+            <div class="hero-overlay">
+                <div class="container">
+                    <div class="hero-content">
+                        <h1>Découvrez le monde du cinéma</h1>
+                        <p class="hero-subtitle">Plus de 50 films à explorer, des classiques aux dernières sorties</p>
+                        <div class="hero-search">
+                            <input type="text" class="hero-search-input" placeholder="Que voulez-vous regarder ?">
+                            <button class="hero-search-btn">
+                                <i class="fas fa-search"></i> Rechercher
+                            </button>
+                        </div>
+                        <div class="hero-genres">
+                            <span class="genre-tag" data-genre="Action">🎬 Action</span>
+                            <span class="genre-tag" data-genre="Comédie">😂 Comédie</span>
+                            <span class="genre-tag" data-genre="Drame">🎭 Drame</span>
+                            <span class="genre-tag" data-genre="Science-fiction">🚀 Science-fiction</span>
+                            <span class="genre-tag" data-genre="Horreur">🧟 Horreur</span>
+                            <span class="genre-tag" data-genre="Romance">💕 Romance</span>
+                            <span class="genre-tag" data-genre="Animation">👨‍👩‍👧 Animation</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section Genres -->
+        <section class="genres-section container" id="genres">
+            <h2 class="section-title">Explorez par genre</h2>
+            <div class="genres-grid">
+                <div class="genre-card" data-genre="Action">
+                    <div class="genre-icon">🎬</div>
+                    <h3>Action</h3>
+                    <p class="genre-count">12 films</p>
+                </div>
+                <div class="genre-card" data-genre="Comédie">
+                    <div class="genre-icon">😂</div>
+                    <h3>Comédie</h3>
+                    <p class="genre-count">10 films</p>
+                </div>
+                <div class="genre-card" data-genre="Drame">
+                    <div class="genre-icon">🎭</div>
+                    <h3>Drame</h3>
+                    <p class="genre-count">9 films</p>
+                </div>
+                <div class="genre-card" data-genre="Science-fiction">
+                    <div class="genre-icon">🚀</div>
+                    <h3>Science-fiction</h3>
+                    <p class="genre-count">8 films</p>
+                </div>
+                <div class="genre-card" data-genre="Horreur">
+                    <div class="genre-icon">🧟</div>
+                    <h3>Horreur</h3>
+                    <p class="genre-count">7 films</p>
+                </div>
+                <div class="genre-card" data-genre="Romance">
+                    <div class="genre-icon">💕</div>
+                    <h3>Romance</h3>
+                    <p class="genre-count">6 films</p>
+                </div>
+                <div class="genre-card" data-genre="Animation">
+                    <div class="genre-icon">👨‍👩‍👧</div>
+                    <h3>Animation</h3>
+                    <p class="genre-count">5 films</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section Tous les Films -->
+        <section class="movies-section container" id="movies">
+            <div class="section-header">
+                <h2 class="section-title">Tous les films</h2>
+                <div class="movies-count">
+                    <span id="totalMovies">57</span> films disponibles
+                </div>
+            </div>
+
+            <div class="movies-grid" id="moviesGrid">
+                <!-- Les films seront chargés ici dynamiquement -->
+            </div>
+
+            <div class="loading" id="loadingIndicator">
+                <div class="spinner"></div>
+                <p>Chargement des films...</p>
+            </div>
+        </section>
+
+        <!-- Section Favoris -->
+        <section class="favorites-section container" id="favorites">
+            <div class="section-header">
+                <h2 class="section-title">Mes films favoris</h2>
+                <div class="favorites-empty" id="favoritesEmpty">
+                    <i class="fas fa-heart-broken"></i>
+                    <p>Vous n'avez pas encore de films favoris</p>
+                    <button class="btn browse-movies">
+                        <i class="fas fa-film"></i> Parcourir les films
+                    </button>
+                </div>
+            </div>
+
+            <div class="favorites-grid" id="favoritesGrid">
+                <!-- Les films favoris seront chargés ici dynamiquement -->
+            </div>
+        </section>
+
+        <!-- Modal Détails du Film -->
+        <div class="modal-overlay" id="movieModal">
+            <div class="modal-content">
+                <button class="modal-close" id="closeModal">&times;</button>
+                <div class="modal-body" id="modalBody">
+                    <!-- Les détails du film seront chargés ici -->
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3 class="footer-title">CinéMax</h3>
+                    <p>Votre destination cinéma en ligne. Découvrez, explorez et profitez du meilleur du 7ème art.</p>
+                    <div class="footer-social">
+                        <a href="#" class="social-icon"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="social-icon"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="social-icon"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="social-icon"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+
+                <div class="footer-section">
+                    <h3 class="footer-title">Navigation</h3>
+                    <ul class="footer-links">
+                        <li><a href="#home"><i class="fas fa-chevron-right"></i> Accueil</a></li>
+                        <li><a href="#movies"><i class="fas fa-chevron-right"></i> Films</a></li>
+                        <li><a href="#genres"><i class="fas fa-chevron-right"></i> Genres</a></li>
+                        <li><a href="#favorites"><i class="fas fa-chevron-right"></i> Favoris</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-section">
+                    <h3 class="footer-title">Genres populaires</h3>
+                    <ul class="footer-links">
+                        <li><a href="#" data-genre="Action"><i class="fas fa-chevron-right"></i> Action</a></li>
+                        <li><a href="#" data-genre="Comédie"><i class="fas fa-chevron-right"></i> Comédie</a></li>
+                        <li><a href="#" data-genre="Science-fiction"><i class="fas fa-chevron-right"></i> Science-fiction</a></li>
+                        <li><a href="#" data-genre="Animation"><i class="fas fa-chevron-right"></i> Animation</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-section">
+                    <h3 class="footer-title">Contact</h3>
+                    <ul class="footer-links">
+                        <li><i class="fas fa-envelope"></i> contact@cinemax.com</li>
+                        <li><i class="fas fa-phone"></i> +33 1 23 45 67 89</li>
+                        <li><i class="fas fa-map-marker-alt"></i> Paris, France</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <p>&copy; 2026 CinéMax. Tous droits réservés. | Conçu avec <i class="fas fa-heart" style="color: #e50914;"></i> pour les amateurs de cinéma</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="movies-data.js"></script>
+    <script src="app.js"></script>
+</body>
+
+</html>
